@@ -16,6 +16,19 @@ docker run -it --rm \
     -v $DOCKER_DATA/postgres/log:/var/log/postgresql/ postgres
 ```
 
+Now modify /etc/postgresql/$PSQL_VERSION/main/pg_hba.conf with
+
+```
+#host all postgres 0.0.0.0/0 trust #only if your apps need to?
+host all all 0.0.0.0/0 md5
+```
+and postgresql.conf with
+`listen_addresses = '*'`
+(or choose safer controls if your device is externally accessible - I'm using LAN)
+
+Quit the container and rerun the same command. 
+
+
 ## Postcondition
 You have a container accessible (to other containers on the same network, `--net=postgres`) by hostname 'postgres'. Data is persisted to `$DOCKER_DATA`. If you remove the postgres container and start a new container while `$DOCKER_DATA` already has data, the new container will use the old database.
 
