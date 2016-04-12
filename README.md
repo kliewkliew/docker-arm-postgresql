@@ -13,7 +13,8 @@ docker run -it --rm \
     --net=postgres \
     -v $DOCKER_DATA/postgres/data:/var/lib/postgresql/$PSQL_VERSION/main \
     -v $DOCKER_DATA/postgres/conf:/etc/postgresql/$PSQL_VERSION/main \
-    -v $DOCKER_DATA/postgres/log:/var/log/postgresql/ postgres
+    -v $DOCKER_DATA/postgres/log:/var/log/postgresql/ \
+kliew/arm-postgresql
 ```
 
 Now modify /etc/postgresql/$PSQL_VERSION/main/pg_hba.conf with
